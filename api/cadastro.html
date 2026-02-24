@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Item</title>
+</head>
+<body>
+    <h1>Novo Cadastro</h1>
+    <nav><a href="index.html">Voltar para Lista</a></nav>
+    <hr>
+    <form id="formCadastro">
+        <input type="text" id="nome" placeholder="Nome (Produto/Filme/Música)" required><br><br>
+        <input type="text" id="categoria" placeholder="Categoria" required><br><br>
+        <input type="number" id="preco" placeholder="Preço" step="0.01" required><br><br>
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <script>
+        document.getElementById('formCadastro').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const item = {
+                nome: document.getElementById('nome').value,
+                categoria: document.getElementById('categoria').value,
+                preco: document.getElementById('preco').value
+            };
+
+            const response = await fetch('http://localhost:3000/produtos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(item)
+            });
+
+            if(response.ok) {
+                alert("Cadastro realizado!");
+                window.location.href = "index.html";
+            }
+        });
+    </script>
+</body>
+</html>

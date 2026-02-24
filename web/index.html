@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Store | Início</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">🚀 Universal Store</div>
+        <nav>
+           <a href="index.html">Home</a>
+            <a href="produtos/produtos.html">Produtos</a>
+            <a href="cadastro/cadastro.html">Cadastrar</a>
+            <button id="theme-toggle">🌓 Alternar Tema</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Bem-vindo à Universal Store</h1>
+            <p class="slogan">Encontre tudo o que você precisa: de filmes a eletrônicos, em um só lugar.</p>
+        </section>
+
+        <section class="card-container">
+            <div class="card" onclick="location.href='produtos/produtos.html'">
+                <div class="card-icon">📦</div>
+                <h3>Ver Vitrine</h3>
+                <p>Explore todos os itens cadastrados no nosso estoque em tempo real.</p>
+            </div>
+
+            <div class="card" onclick="location.href='cadastro/cadastro.html'">
+                <div class="card-icon">➕</div>
+                <h3>Novo Cadastro</h3>
+                <p>Adicione novos produtos, músicas ou filmes ao sistema rapidamente.</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

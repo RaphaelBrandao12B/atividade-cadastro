@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Itens</title>
+</head>
+<body>
+    <h1>Itens Cadastrados</h1>
+    <nav><a href="cadastro.html">Cadastrar Novo Item</a></nav>
+    <hr>
+    <div id="lista-produtos"></div>
+
+    <script>
+        async function buscarProdutos() {
+            const response = await fetch('http://localhost:3000/produtos');
+            const dados = await response.json();
+            const container = document.getElementById('lista-produtos');
+            
+            dados.forEach(item => {
+                container.innerHTML += `
+                    <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+                        <p><strong>Nome:</strong> ${item.nome}</p>
+                        <p><strong>Categoria:</strong> ${item.categoria}</p>
+                        <p><strong>Preço:</strong> R$ ${item.preco}</p>
+                    </div>`;
+            });
+        }
+        buscarProdutos();
+    </script>
+</body>
+</html>
