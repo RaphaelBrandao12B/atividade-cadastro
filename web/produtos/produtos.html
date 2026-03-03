@@ -2,22 +2,27 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Universal Store | Vitrine</title>
-    <link rel="stylesheet" href="../style.css"> </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raphael Store | Vitrine</title>
+    <link rel="stylesheet" href="produtos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
 <body>
     <header>
-        <div class="logo">🚀 Universal Store</div>
+        <div class="logo">🚀 Raphael Store</div>
         <nav>
-            <a href="../index.html">Home</a>
-            <button id="theme-toggle">🌓 Alternar Tema</button>
+            <a href="../index.html" class="btn-theme">Home</a>
+            <button id="theme-toggle" class="btn-theme">🌓 Tema</button>
         </nav>
     </header>
 
-    <main>
-        <h1>Nossa Vitrine</h1>
+    <main class="container">
+        <h1 class="main-title">Nossa <span>Vitrine</span></h1>
+        
         <div id="lista-produtos" class="card-container">
             </div>
-        <div id="mensagem-vazia" style="display:none; text-align:center;">
+
+        <div id="mensagem-vazia" class="form-box" style="display:none; text-align:center; max-width: 600px;">
             <p>Nenhum produto encontrado no banco de dados.</p>
         </div>
     </main>

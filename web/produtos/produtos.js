@@ -2,7 +2,6 @@
 const body = document.body;
 const themeToggle = document.getElementById('theme-toggle');
 
-// Verifica o tema salvo (ajuste 'dark-mode' para 'dark' se seu CSS for assim)
 if (localStorage.getItem('theme') === 'dark-mode') {
     body.classList.add('dark-mode');
 }
@@ -11,8 +10,6 @@ if (localStorage.getItem('theme') === 'dark-mode') {
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
-        
-        // Salva a escolha para as outras páginas
         if (body.classList.contains('dark-mode')) {
             localStorage.setItem('theme', 'dark-mode');
         } else {
@@ -21,11 +18,11 @@ if (themeToggle) {
     });
 }
 
-// 3. Função para carregar produtos
+// 3. Função para carregar produtos (COM A OPÇÃO DO BOTÃO DE APAGAR)
 async function carregarProdutos() {
-    const lista = document.getElementById('lista-produtos');
+    const lista = document.getElementById('lista-produtos'); //
     try {
-        const res = await fetch('http://localhost:3000/produtos');
+        const res = await fetch('http://localhost:3000/produtos'); //
         const produtos = await res.json();
 
         if (produtos.length === 0) {
@@ -33,19 +30,41 @@ async function carregarProdutos() {
             return;
         }
 
-        // Limpa a lista antes de adicionar para evitar duplicatas
         lista.innerHTML = ""; 
 
         produtos.forEach(p => {
+            // Abaixo está a Opção 2 integrada: o botão com o evento onclick
             lista.innerHTML += `
                 <div class="card-item">
                     <h4>${p.nome}</h4>
                     <span>${p.categoria}</span>
                     <p class="preco">R$ ${p.preco}</p>
+                    <button class="btn-delete" onclick="apagarProduto(${p.id})">🗑️ Apagar</button>
                 </div>`;
         });
     } catch (err) {
         lista.innerHTML = "<p class='vazio'>Erro ao conectar com o servidor.</p>";
+    }
+}
+
+// 4. FUNÇÃO PARA DELETAR: Faz a conexão com a rota DELETE do backend
+async function apagarProduto(id) {
+    if (confirm("Deseja realmente excluir este produto?")) {
+        try {
+            const res = await fetch(`http://localhost:3000/produtos/${id}`, {
+                method: 'DELETE' // Chama a rota DELETE criada no backend
+            });
+
+            if (res.ok) {
+                alert("Sucesso! Item removido."); // Mensagem de sucesso solicitada
+                carregarProdutos(); // Atualiza a tela sem precisar dar F5
+            } else {
+                alert("Erro ao apagar o produto no servidor.");
+            }
+        } catch (err) {
+            console.error("Erro na requisição:", err);
+            alert("Não foi possível conectar ao servidor. O XAMPP está ligado?");
+        }
     }
 }
 

@@ -1,0 +1,193 @@
+/* --- Variáveis e Reset Moderno --- */
+:root {
+    --primary: #00d2ff;
+    --secondary: #9d50bb;
+    --bg-dark: #0f0f0f;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-color: #ffffff;
+    --shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+
+body {
+    background: var(--bg-dark);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* --- Blobs de Fundo Animados --- */
+body::before, body::after {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(80px);
+    animation: move 12s infinite alternate ease-in-out;
+}
+body::before { background: var(--primary); top: -100px; left: -50px; }
+body::after { background: var(--secondary); bottom: -100px; right: -50px; animation-delay: -6s; }
+
+@keyframes move {
+    from { transform: translate(-10%, -10%) scale(1); }
+    to { transform: translate(15%, 15%) scale(1.1); }
+}
+
+/* --- Header com Logo Centralizado e Nav Visível --- */
+header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 20px 5%;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15, 15, 15, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+/* Spacer para equilibrar o layout e manter o logo no centro */
+header::before {
+    content: "";
+    flex: 1;
+}
+
+.logo { 
+    font-weight: 800; 
+    font-size: 1.6rem; 
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    text-align: center;
+    flex: 1; 
+    white-space: nowrap;
+}
+
+header nav { 
+    display: flex; 
+    gap: 12px; 
+    justify-content: flex-end;
+    flex: 1; 
+}
+
+/* --- Botões da Nav (Atalhos e Tema) --- */
+header nav a, .btn-theme { 
+    text-decoration: none;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 0 18px;
+    height: 38px;
+    min-width: 100px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+header nav a:hover, .btn-theme:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
+}
+
+/* --- Título Principal --- */
+.main-title {
+    text-align: center;
+    font-size: 2.8rem;
+    font-weight: 900;
+    margin: 80px 0 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.main-title span {
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- Grid de Produtos Centralizada --- */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+    gap: 30px;
+    padding: 20px 5% 50px;
+    justify-content: center; /* Centraliza os cards na tela */
+}
+
+/* Card Individual Style */
+.card-item {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: var(--shadow);
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-item:hover { 
+    transform: translateY(-12px); 
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.card-item h4 { font-size: 1.5rem; margin: 0 0 10px; color: #fff; }
+
+.categoria {
+    background: rgba(0, 210, 255, 0.15);
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    align-self: flex-start;
+}
+
+.preco {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #00ff88;
+    margin: 20px 0;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+}
+
+/* --- Botão Deletar --- */
+.btn-delete {
+    background: rgba(220, 53, 69, 0.15);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+    color: #ff5f6d;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: auto;
+}
+
+.btn-delete:hover {
+    background: #dc3545;
+    color: white;
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+}
